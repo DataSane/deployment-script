@@ -2,22 +2,25 @@
 
 echo "[Starting deploy setup]"
 
-echo "Updating and upgrating Linux system..."
-sudo apt update && sudo apt upgrade –y
+echo "Updating and upgrading Linux system..."
+sudo apt update && sudo apt upgrade -y
 
-echo "Installing dependencies.."
-sudo apt install docker.io
+echo "Installing dependencies..."
+sudo apt install -y docker.io docker-compose
+
 docker --version
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo apt get install docker-compose
 docker-compose --version
 
+sudo systemctl start docker
+sudo systemctl enable docker
+
 echo "Cloning the project..."
-sudo git clone https://www.github.com/datasane/datasane-app.git
+git clone https://www.github.com/datasane/datasane-app.git
 cd datasane-app
-sudo docker-compose up --build
 
+read -p "Enter AWS Access Key ID: " AWS_ACCESS_KEY_ID
+read -p "Enter AWS Secret Access Key: " AWS_SECRET_ACCESS_KEY
+read -p "Enter AWS Region: " AWS_REGION
 
-
-
+echo "Starting Docker Compose..."
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_REGION=$AWS_REGION sudo docker-compose up --build

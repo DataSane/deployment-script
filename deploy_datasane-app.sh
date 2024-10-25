@@ -11,22 +11,17 @@ sudo apt install -y docker.io docker-compose
 docker --version
 docker-compose --version
 
-sudo usermod -aG docker $USER
-
 sudo systemctl start docker
 sudo systemctl enable docker
 
 echo "Cloning the project..."
-if [ -d "datasane-app" ]; then
-  echo "Directory datasane-app already exists. Removing it..."
-  rm -rf datasane-app
-fi
-git clone https://github.com/datasane/datasane-app.git
+git clone https://www.github.com/datasane/datasane-app.git
 cd datasane-app
 
 read -p "Enter AWS Access Key ID: " AWS_ACCESS_KEY_ID
 read -p "Enter AWS Secret Access Key: " AWS_SECRET_ACCESS_KEY
-read -p "Enter AWS Region: " AWS_REGION
+read -p "Enter AWS Session Token: " AWS_SESSION_TOKEN
+
 
 echo "Starting Docker Compose..."
-AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_REGION=$AWS_REGION docker-compose up --build
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN sudo docker-compose up --build

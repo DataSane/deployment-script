@@ -23,4 +23,4 @@ read -p "Enter AWS Secret Access Key: " AWS_SECRET_ACCESS_KEY
 read -p "Enter AWS Region: " AWS_REGION
 
 echo "Starting Docker Compose..."
-AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_REGION=$AWS_REGION sudo docker-compose up --build
+sudo -E env "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" "AWS_REGION=$AWS_REGION" docker-compose up --build

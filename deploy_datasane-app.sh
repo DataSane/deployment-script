@@ -36,4 +36,4 @@ export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
 
 # Inicia o Docker Compose
 echo "Starting Docker Compose..."
-docker compose up --build
+docker-compose up --build

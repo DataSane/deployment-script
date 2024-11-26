@@ -8,7 +8,9 @@ sudo apt update && sudo apt upgrade -y
 
 # Instala o Docker e o plugin do Docker Compose V2
 echo "Installing Docker and Docker Compose V2..."
-sudo apt install -y docker.io docker-compose-plugin
+sudo apt install -y docker.io
+sudo apt install -y docker-compose
+sudo apt install -y docker-compose-plugin
 
 # Verifica as versões instaladas
 docker --version
@@ -18,6 +20,9 @@ docker compose version
 echo "Starting Docker service..."
 sudo systemctl start docker
 sudo systemctl enable docker
+
+# Colocando Docker como root
+sudo usermod -aG docker $USER
 
 # Clona o projeto
 echo "Cloning the project..."
